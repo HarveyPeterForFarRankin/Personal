@@ -39,12 +39,13 @@ const WithDraggable = (Component:any) => {
 
     render(){
         const props = {
-        mouseDown: () => this.setPressed(true),
-        mouseUp: () => this.setPressed(false),
-        mouseMove: this.onMouseMove
+        onMouseDown: () => this.setPressed(true),
+        onMouseUp: () => this.setPressed(false),
+        onMouseMove: this.onMouseMove,
     }
         return(
             <div
+            style={{display:'inline-block'}}
             ref={this.ref}>
                 <Component {...props} />
             </div>

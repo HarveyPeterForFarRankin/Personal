@@ -3,19 +3,17 @@ import styles from '../../Draggable/Nav/nav.module.css'
 import withDraggable from '../../../HOC/Draggable';
 
 interface IProps {
-    mouseUp: () => void;
-    mouseDown:() => void;
-    mouseMove: (event:any) =>  void;
+    onMouseUp: () => void;
+    onMouseDown:() => void;
+    onMouseMove: (event:any) =>  void;
 }
 
-const NavDrag = ({mouseUp, mouseDown, mouseMove}: IProps) => {
+const NavDrag = (props: IProps) => {
     return (
         <div
-            style={{cursor:'pointer'}}
-            onMouseMove={mouseMove}
-            onMouseUp={mouseUp}
-            onMouseDown={mouseDown}
-            onMouseLeave={mouseUp}
+            style={{cursor:'pointer', width:'200px'}}
+            onMouseLeave={props.onMouseUp}
+            {...props}
             >
                 <p>Nav tag</p>
         </div>

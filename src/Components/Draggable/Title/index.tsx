@@ -1,19 +1,17 @@
 import withDraggable from '../../../HOC/Draggable';
 
 interface IProps {
-    mouseUp: () => void;
-    mouseDown:() => void;
-    mouseMove: (event:any) =>  void;
+    onMouseUp: () => void;
+    onMouseDown:() => void;
+    onMouseMove: (event:any) =>  void;
 }
 
-const TitleDrag = ({mouseUp, mouseDown, mouseMove}: IProps) => {
+const TitleDrag = (props: IProps) => {
     return (
         <div 
             style={{cursor:'pointer'}}
-            onMouseMove={mouseMove}
-            onMouseUp={mouseUp}
-            onMouseDown={mouseDown}
-            onMouseLeave={mouseUp}
+            onMouseLeave={props.onMouseUp}
+            {...props}
             >
                 <p>Title tag</p>
         </div>
