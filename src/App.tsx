@@ -1,10 +1,12 @@
 import './App.css';
-import NavDrag from './Components/Draggable/Nav';
+import Test from './Components/Draggable/Nav';
+import Drag from './HOC/Draggable';
+const Testing = Drag(Test)
 
 function App() {
   return (
     <div>
-     <NavDrag/>
+     <Testing/>
     </div>
   );
 }

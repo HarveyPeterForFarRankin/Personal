@@ -1,37 +1,15 @@
-import React, {useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState } from 'react';
 import styles from '../../Draggable/Nav/nav.module.css'
+import withDraggable from '../../../HOC/Draggable';
 
-const NavDrag = () => {
-    const [pressed, setpressed] = useState(false)
-    const [position, setPosition] = useState({x: 0, y: 0})
-    const ref = useRef()
-    
-    useEffect(() => {
-        const { x, y} = position
-        ref.current.style.transform = `translate(${x}px, ${y}px)`
-    },[position])
-    
-    const onMouseMove = (event:any) => {
-        const { movementX , movementY } = event
-        const { x, y } = position
-        if (pressed) {
-        setPosition({
-            x: x + movementX,
-            y: y + movementY
-            })
-        }
-    }
 
+const Test = () => {
     return (
         <div
-            className={styles.container}
-            onMouseDown={() => setpressed(true)}
-            onMouseUp={() => setpressed(false)}
-            onMouseMove={ onMouseMove }
-            ref={ ref }>
-            can drag
+            className={styles.container}>
+                test
         </div>
     )
 }
 
-export default NavDrag
+export default withDraggable(Test)
