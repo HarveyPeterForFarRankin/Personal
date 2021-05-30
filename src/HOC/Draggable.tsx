@@ -1,49 +1,52 @@
-import { throws } from 'assert/strict';
-import React, {Component} from 'react';
+import React, {Component,createRef} from 'react';
 
 
 const WithDraggable = (Component:any) => {
-    return class Draggable extends React.Component {
+    return class Draggable extends React.Component<any,any> {
     constructor(props:any){
         super(props);
         this.state = {
-            position: { x:0 ,y:0 },
+            position: { x: 0 ,y: 0 },
             pressed: false,
         } 
-        this.ref = React.createRef();
+        this.ref = createRef();
     }
 
     componentDidUpdate = (prevProps:any, prevState:any) => {
-        const { position } = prevState;
-        const { position: currentPos} = this.state;
-        console.log(JSON.stringify(position), JSON.stringify(currentPos))
-        if(JSON.stringify(position) !== JSON.stringify(currentPos)){
-            const { x, y } = currentPos
+        if(JSON.stringify(prevState.position) !== JSON.stringify(this.state.position)){
+            const { x, y } = this.state.position;
             this.ref.current.style.transform = `translate(${x}px, ${y}px)`
         }
     }
 
-    setPressed = (val:boolean) => this.setState({pressed: val })
+    setPressed = (val:boolean) => {
+        this.setState({pressed: val })
+    } 
     
     onMouseMove = (event: any) => {
         const { movementX , movementY } = event
                 const { pressed, position: { x, y } } = this.state
-                console.log(pressed)
                 if (pressed) {
                     this.setState({
+                        position: {
                         x: x + movementX,
                         y: y + movementY
+                        }
+                       
                     })
                 }
     }
 
     render(){
+        const props = {
+        mouseDown: () => this.setPressed(true),
+        mouseUp: () => this.setPressed(false),
+        mouseMove: this.onMouseMove
+    }
         return(
             <div
-            onMouseDown={() => this.setPressed(true)}
-            onMouseUp={() => this.setPressed(false)}
-            onMouseMove={this.onMouseMove}>
-                <Component/>
+            ref={this.ref}>
+                <Component {...props} />
             </div>
         )
     }

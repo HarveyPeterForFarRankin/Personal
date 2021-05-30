@@ -1,12 +1,15 @@
 import './App.css';
-import Test from './Components/Draggable/Nav';
-import Drag from './HOC/Draggable';
-const Testing = Drag(Test)
+import NavTag from './Components/Draggable/Nav';
+import TitleTag from './Components/Draggable/Title';
 
 function App() {
   return (
     <div>
-     <Testing/>
+     <NavTag/>
+     <TitleTag/>
+     <div>
+
+     </div>
     </div>
   );
 }
