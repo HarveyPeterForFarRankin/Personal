@@ -1,23 +1,19 @@
 
-import styles from '../../Draggable/Nav/nav.module.css'
-import withDraggable from '../../../HOC/Draggable';
+import Draggable from 'react-draggable';
 
 interface IProps {
-    onMouseUp: () => void;
-    onMouseDown:() => void;
-    onMouseMove: (event:any) =>  void;
 }
 
 const NavDrag = (props: IProps) => {
     return (
-        <div
-            style={{cursor:'pointer', width:'200px'}}
-            onMouseLeave={props.onMouseUp}
-            {...props}
-            >
-                <p>Nav tag</p>
-        </div>
+        <Draggable>
+            <div
+                style={{cursor:'pointer', width:'200px', height:'50px', border:'1px solid black'}}
+                >
+                    <p>Nav tag</p>
+            </div>
+        </Draggable>
     )
 }
 
-export default withDraggable(NavDrag)
+export default NavDrag

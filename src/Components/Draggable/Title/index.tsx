@@ -1,4 +1,5 @@
 import withDraggable from '../../../HOC/Draggable';
+import Draggable from 'react-draggable';
 
 interface IProps {
     onMouseUp: () => void;
@@ -8,14 +9,16 @@ interface IProps {
 
 const TitleDrag = (props: IProps) => {
     return (
-        <div 
-            style={{cursor:'pointer'}}
-            onMouseLeave={props.onMouseUp}
-            {...props}
-            >
-                <p>Title tag</p>
-        </div>
+        <Draggable>
+            <div 
+                style={{cursor:'pointer'}}
+                onMouseLeave={props.onMouseUp}
+                {...props}
+                >
+                    <p>Title tag</p>
+            </div>
+        </Draggable>
     )
 }
 
-export default withDraggable(TitleDrag)
+export default TitleDrag
