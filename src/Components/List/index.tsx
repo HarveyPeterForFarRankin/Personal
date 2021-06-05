@@ -1,27 +1,34 @@
-//CORE
-import Draggable from 'react-draggable';
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 //APP
-import classes from '../list.module.css';
-import { IElement } from '../../Containers /Main/IComponentstate' ;
+import classes from './list.module.css';
+import { IElement } from '../../Containers /Main/IComponentstate';
+
+//COMPONENTS
+import ListItem from './ListItem';
 
 interface IListProps {
     elements: IElement[];
+    handleOnDrag: () => any;
+    handleDragStop: (index:number) => void;
+    handleHover?: () => any;
 }
 
-const List = ({elements}: IListProps) => {
-
+const List = ({ 
+    elements, 
+    handleOnDrag, 
+    handleDragStop, 
+    handleHover
+}: IListProps) => {    
     return (
-        <section className={classes.container}>
-            {elements.map((el:IElement) => {
-                return (
-                    <Draggable>
-                        <div>
-                            {el.id}
-                        </div>
-                    </Draggable>
-                )
-            })}
+        <section  
+            onMouseLeave={handleHover}
+            onMouseEnter={handleHover} 
+            className={classes.container}>
+                {elements.map((el:IElement, index:number) => {
+                    return (
+                        <ListItem element={el} handleDragStop={handleDragStop} handleOnDrag={handleOnDrag} index={index} />
+                    )
+                })}
         </section>
     )
 }

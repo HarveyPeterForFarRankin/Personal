@@ -1,0 +1,6 @@
+.itemContainer {
+    border: 1px solid black;
+}
+.dragged {
+    pointer-events: none;
+}
