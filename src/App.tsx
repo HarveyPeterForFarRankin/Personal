@@ -4,6 +4,7 @@ import TitleTag from './Components/Draggable/Title';
 import Draggable from 'react-draggable';
 import { Component } from 'react';
 import React from 'react'
+import Main from './Containers /Main';
 
 interface IComponent {
   elements: {id:number}[];
@@ -28,12 +29,12 @@ class App extends Component<any, IComponent> {
     const {elements, elements1,onHover} = this.state
     const elementsClone = [...elements];
     const remainingEl = elementsClone.splice(index,1)
+    this.setState({isDragged: false})
     if(onHover){
-      //only run 
+      //only run when box is being hovered
       this.setState({
         elements: elementsClone,
         elements1: [...elements1, ...remainingEl],
-        isDragged:false
       })
     }
   }
@@ -43,7 +44,7 @@ class App extends Component<any, IComponent> {
     const {elements,elements1,isDragged} = this.state
     return (
       <div style={{width:'100%', display:'flex',justifyItems:'center',justifyContent:'center',padding:'50px'}}>
-        <section style={{width:'500px', border:'1px solid black', padding: '50px',margin:"10px"}}>
+        {/* <section style={{width:'500px', border:'1px solid black', padding: '50px',margin:"10px"}}>
           {elements.map((el:IComponent, index:number) => {
             return (
               <Draggable onDrag={() => this.setState({isDragged:true})} position={{x:0,y:0}} onStop={() => this.sortRowList(index)}>
@@ -64,7 +65,9 @@ class App extends Component<any, IComponent> {
               </Draggable>
             )
           })}
-        </section>
+        </section> */}
+
+          <Main/>
         <div>
         </div>
       </div>
