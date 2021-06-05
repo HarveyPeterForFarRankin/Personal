@@ -3,7 +3,6 @@ import NavTag from './Components/Draggable/Nav';
 import TitleTag from './Components/Draggable/Title';
 import Draggable from 'react-draggable';
 import { Component } from 'react';
-import React from 'react'
 import Main from './Containers /Main';
 
 interface IComponent {
