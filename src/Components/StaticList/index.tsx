@@ -1,6 +1,11 @@
-import ListItem from '../List/ListItem';
+// APP
 import classes from './staticList.module.css';
-import {IElement} from '../../Containers /Main/IComponentstate'
+
+// COMPONENTS
+import ListItem from '../ListItem';
+
+//TYPES
+import IElement from '../../Models/Element';
 
 interface IStaticListProps {
     elements: IElement[];

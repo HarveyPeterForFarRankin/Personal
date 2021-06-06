@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 //APP
 import classes from './list.module.css';
-import { IElement } from '../../Containers /Main/IComponentstate';
+
+//TYPES
+import IElement  from '../../Models/Element';
 
 //COMPONENTS
-import ListItem from './ListItem';
+import ListItem from '../ListItem';
 
 interface IListProps {
     elements: IElement[];

@@ -4,8 +4,8 @@ import {
     UPDATE_INPUT_ELEMENTS,
     TOGGLE_HOVER,
     SET_NEW_POSITION
-} from '../../Containers /Main/types'
-import { IComponentState } from '../../Containers /Main/IComponentstate'
+} from './types'
+import IComponentState  from '../../Containers /Main/IComponentstate'
 
 export const elementsReducer = (state: IComponentState, action: any) => {
   const { payload } = action

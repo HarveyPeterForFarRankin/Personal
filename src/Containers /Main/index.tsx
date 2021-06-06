@@ -12,12 +12,13 @@ import {
     UPDATE_ELEMENTS, 
     UPDATE_INPUT_ELEMENTS,
     TOGGLE_HOVER
-} from './types';
+} from '../../Reducers/Main/types';
+import IElement  from '../../Models/Element';
 
-// Components
+// COMPONENTS
 import List from '../../Components/List';
 import StaticList from '../../Components/StaticList';
-import { IElement } from './IComponentstate';
+
 
 const Main = () => {
     const [elementsState, elementDispatcher] = useReducer(elementsReducer, elementsInitialState)
@@ -32,25 +33,25 @@ const Main = () => {
         })
     }, [] )
 
-    const stopDrag = (index:number) => {
+    const handleElementsSwitch = (index:number) => {
         const { 
             elements, 
             inputElements, 
             inputContainerIsHovered, 
             newItemPosition
         } = elementsState;
-        //set drag to stop
+
         if(inputContainerIsHovered){
-            const elClone = [...elements];
-            const splicedEl = elClone.splice(index,1)[0];
-            const remainingElements = elClone;
-            const inputElsClone = inputElements.map((el:IElement) => {
+            const selectList = [...elements];
+            const splicedEl = selectList.splice(index,1)[0];
+            const selectListMutated = selectList;
+            const inputsList = inputElements.map((el:IElement) => {
                 return {...el}
             })
             // insert new el in position or push onto the empty array
-            inputElsClone.length ? insertIntoArray(inputElsClone, newItemPosition, splicedEl) : inputElsClone.push(splicedEl);
+            inputsList.length ? insertIntoArray(inputsList, newItemPosition, splicedEl) : inputsList.push(splicedEl);
             // update lists
-            updateLists(remainingElements, inputElsClone);
+            updateLists(selectListMutated, inputsList);
         }
     } 
 
@@ -78,7 +79,7 @@ const Main = () => {
     return (
         <main className={classes.container}>
             <Provider value={{elementsState,elementDispatcher}}>
-                <StaticList handleDragStop={stopDrag} elements={elements}/>
+                <StaticList handleDragStop={handleElementsSwitch} elements={elements}/>
                 <List elements={inputElements} handleHover={toggleHover}/>
             </Provider>
         </main>

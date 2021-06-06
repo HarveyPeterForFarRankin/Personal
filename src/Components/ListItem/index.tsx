@@ -3,12 +3,12 @@ import Draggable from 'react-draggable';
 
 // APP
 import classes from './listItem.module.css';
-import {useCustomContext} from '../../../Contexts/MainContext';
+import {useCustomContext} from '../../Contexts/MainContext';
 import {useState} from 'react'
 
 //TYPES
-import {IElement} from '../../../Containers /Main/IComponentstate';
-import {SET_NEW_POSITION} from '../../../Containers /Main/types';
+import IElement from '../../Models/Element';
+import {SET_NEW_POSITION} from '../../Reducers/Main/types';
 
 interface IListItemProps {
     element: IElement;
