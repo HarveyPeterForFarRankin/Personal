@@ -10,14 +10,12 @@ import ListItem from '../ListItem';
 
 interface IListProps {
     elements: IElement[];
-    handleOnDrag?: () => any;
     handleDragStop?: (index:number) => void;
     handleHover?: (isHovered: boolean) => any;
 }
 
 const List = ({ 
     elements, 
-    handleOnDrag, 
     handleDragStop, 
     handleHover
 }: IListProps) => {   
@@ -28,7 +26,7 @@ const List = ({
             className={classes.container}>
                 {elements.map((el:IElement, index:number) => {
                     return (
-                        <ListItem key={el.id} element={el} handleDragStop={handleDragStop} handleOnDrag={handleOnDrag} index={index} />
+                        <ListItem key={el.id} element={el} handleDragStop={handleDragStop} index={index} />
                     )
                 })}
         </section>

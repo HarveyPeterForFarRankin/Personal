@@ -24,7 +24,7 @@ const Main = () => {
     const [elementsState, elementDispatcher] = useReducer(elementsReducer, elementsInitialState)
 
     useEffect(() => {
-        //set the initial state
+        //set the initial state of the static list
         elementDispatcher({
             type: UPDATE_ELEMENTS,
             payload: {
@@ -49,7 +49,7 @@ const Main = () => {
                 return {...el}
             })
             // insert new el in position or push onto the empty array
-            inputsList.length ? insertIntoArray(inputsList, newItemPosition, splicedEl) : inputsList.push(splicedEl);
+            inputsList.length ? insertIntoArrayAtPoisition(inputsList, newItemPosition, splicedEl) : inputsList.push(splicedEl);
             // update lists
             updateLists(selectListMutated, inputsList);
         }
@@ -64,8 +64,8 @@ const Main = () => {
 
     const toggleHover = (isHovered: boolean) => elementDispatcher({type: TOGGLE_HOVER, payload: { inputContainerIsHovered: isHovered }});
 
-    //TODO - create function that does not mutate;
-    const insertIntoArray = (arr: IElement[], newPosition: number, element: any ) => arr.splice(newPosition, 0, element); 
+    // TODO - create function that does not mutate;
+    const insertIntoArrayAtPoisition = (arr: IElement[], position: number, newElement: any) => arr.splice(position, 0, newElement); 
 
     const { 
         elements ,
