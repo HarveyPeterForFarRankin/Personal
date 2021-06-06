@@ -1,6 +1,10 @@
 .itemContainer {
-    border: 1px solid black;
+    position: relative;
+    margin:5px;
+    height: 100px;
+    z-index: 1000;
 }
 .dragged {
     pointer-events: none;
+    z-index: 5000;
 }

@@ -1,36 +1,74 @@
 // CORE
 import Draggable from 'react-draggable';
+
 // APP
 import classes from './listItem.module.css';
 import {useCustomContext} from '../../../Contexts/MainContext';
+import {useState} from 'react'
 
 //TYPES
 import {IElement} from '../../../Containers /Main/IComponentstate';
+import {SET_NEW_POSITION} from '../../../Containers /Main/types';
 
 interface IListItemProps {
     element: IElement;
     index: number;
-    handleDragStop: (index: number) => any;
-    handleOnDrag: () => any;
+    handleDragStop: any;
 }
 
-const ListItem = ({element, index, handleDragStop, handleOnDrag}: IListItemProps) => {
+const ListItem = ({
+    element : {
+        id,
+        backgroundColor
+    }, 
+    index, 
+    handleDragStop, 
+}: IListItemProps) => {
+    // get context
     const {
-        elementsDispatcher, 
+        elementDispatcher, 
         elementsState: {
-            isDragged
+        
         }
     } = useCustomContext();
+
+    const [itemDragged, setDragged] = useState(false)
+
+    const hovering = (e:any) => {
+        const {
+            target: {
+                clientHeight
+            } 
+        } = e;
+        const appendAbove = elementMousePosition(e) < (clientHeight/2);
+        const position = appendAbove ? index : index + 1;
+        // update the element positiion
+        elementDispatcher({type: SET_NEW_POSITION, payload: {newItemPosition: position} })
+    }
+
+    const elementMousePosition = ({clientY, target}:any) => {
+        const { top } = target.getBoundingClientRect();
+        //returns mouse position relative to the event element
+        return clientY - top;
+    }
+
+    const handleStop = (): void => {
+        // stop item drag
+        setDragged(false);
+        // handle drag stop on list
+        if(!!handleDragStop) return handleDragStop(index);
+    }
 
     return (
          <Draggable 
             position={{x:0,y:0}} 
-            onStop={ () => handleDragStop(index)} 
-            onDrag={handleOnDrag}>
+            onStop={handleStop} 
+            onDrag={() => setDragged(true)}>
                 <div 
-                    key={element.id}
-                    className={`${classes.itemContainer} ${isDragged && (classes.dragged)}`}>
-                    {element.id}
+                    style={{backgroundColor}}
+                    className={`${classes.itemContainer} ${itemDragged && (classes.dragged)}`}
+                    onMouseMove={hovering}
+                    key={id}>
                 </div>
         </Draggable>
     )
