@@ -19,7 +19,8 @@ interface IListItemProps {
 const ListItem = ({
     element : {
         id,
-        backgroundColor
+        backgroundColor,
+        text
     }, 
     index, 
     handleDragStop, 
@@ -65,10 +66,11 @@ const ListItem = ({
             onStop={handleStop} 
             onDrag={() => setDragged(true)}>
                 <div 
-                    style={{backgroundColor}}
+                    styles={{backgroundColor: backgroundColor}}
                     className={`${classes.itemContainer} ${itemDragged && (classes.dragged)}`}
                     onMouseMove={hovering}
                     key={id}>
+                        {text}
                 </div>
         </Draggable>
     )

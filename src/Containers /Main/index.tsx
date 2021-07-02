@@ -18,7 +18,30 @@ import IElement  from '../../Models/Element';
 // COMPONENTS
 import List from '../../Components/List';
 import StaticList from '../../Components/StaticList';
+import Nav from '../../Components/Elements/Nav';
+import Header from '../../Components/Elements/Header';
+import About from '../../Components/Elements/About';
 
+const dummyElements = [
+    {
+        id: 1,
+        Element: Nav,
+        backgroundColor: 'green',
+        text: ` <nav><p>This is the nav bar</p></nav>`
+    },
+    {
+        id: 2,
+        Element: Header,
+        backgroundColor: 'blue',
+        text: `<h1>This is the header</h1>`
+    },
+    {
+        id: 3,
+        Element: About,
+        backgroundColor: 'orange',
+        text: '<div>This is the about section</div>'
+    }
+]
 
 const Main = () => {
     const [elementsState, elementDispatcher] = useReducer(elementsReducer, elementsInitialState)
@@ -28,7 +51,7 @@ const Main = () => {
         elementDispatcher({
             type: UPDATE_ELEMENTS,
             payload: {
-                elements: [{id: 1, backgroundColor: 'red'}, {id: 2, backgroundColor: 'green'}, {id:3, backgroundColor: 'blue'}]
+                elements: dummyElements
             } 
         })
     }, [] )
@@ -77,10 +100,17 @@ const Main = () => {
     } = CustomContext
 
     return (
-        <main className={classes.container}>
+        <main>
             <Provider value={{elementsState,elementDispatcher}}>
-                <StaticList handleDragStop={handleElementsSwitch} elements={elements}/>
-                <List elements={inputElements} handleHover={toggleHover}/>
+                {inputElements.map(({Element}: IElement) => {
+                    return (
+                        <Element/>
+                    )
+                })}
+                <div className={classes.container}>
+                    <StaticList handleDragStop={handleElementsSwitch} elements={elements}/>
+                    <List  elements={inputElements} handleHover={toggleHover}/>
+                </div>
             </Provider>
         </main>
     )
