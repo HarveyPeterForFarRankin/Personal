@@ -14,7 +14,7 @@ interface IListItemProps {
     element: IElement;
     index: number;
     handleDragStop: any;
-    setHoverStyling?: (isDragged: boolean) => any;
+    setHoverStyling?: () => any;
 }
 
 const ListItem = ({
@@ -53,7 +53,9 @@ const ListItem = ({
         const position = appendAbove ? index : index + 1;
         // update the element positiion
         await elementDispatcher({type: SET_NEW_POSITION, payload: {newItemPosition: position} } );
-        if(setHoverStyling) setHoverStyling(isDragged);
+        if(setHoverStyling){
+            setHoverStyling();
+        }   
     }
 
     const elementMousePosition = ({clientY, target}:any) => {

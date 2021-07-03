@@ -28,17 +28,21 @@ const List = ({
         }
     } = useCustomContext();
 
+    const close = () => {
+        console.log('left');
+    }
+
     return (
         <section  
             onMouseLeave={() => handleHover && handleHover(false)}
             onMouseEnter={() => handleHover && handleHover(true)} 
             className={classes.container}>
-                <div className={classes.listContainer}>
+                <div onMouseLeave={close} className={classes.listContainer}>
                     {elements.map((el:IElement, index:number) => {
                         const above = (isDragged && newItemPosition === index + 1);
                         return (
                             <div className={` ${classes.box} ${above && (classes.below)}`} id={index.toString()}>
-                                <ListItem key={el.id} element={el} handleDragStop={handleDragStop} index={index} />
+                                <ListItem  key={el.id} element={el} handleDragStop={handleDragStop} index={index} />
                             </div>
                         )
                     })}
