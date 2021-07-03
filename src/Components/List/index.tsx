@@ -4,6 +4,7 @@ import classes from './list.module.css';
 
 //TYPES
 import IElement  from '../../Models/Element';
+import { useCustomContext } from '../../Contexts/MainContext';
 
 //COMPONENTS
 import ListItem from '../ListItem';
@@ -18,17 +19,31 @@ const List = ({
     elements, 
     handleDragStop, 
     handleHover
-}: IListProps) => {   
+}: IListProps) => { 
+    
+    const {
+        elementsState: {
+            newItemPosition,
+            isDragged
+        }
+    } = useCustomContext();
+
     return (
         <section  
             onMouseLeave={() => handleHover && handleHover(false)}
             onMouseEnter={() => handleHover && handleHover(true)} 
             className={classes.container}>
-                {elements.map((el:IElement, index:number) => {
-                    return (
-                        <ListItem key={el.id} element={el} handleDragStop={handleDragStop} index={index} />
-                    )
-                })}
+                <div className={classes.listContainer}>
+                    {elements.map((el:IElement, index:number) => {
+                        const above = (isDragged && newItemPosition === index + 1);
+                        return (
+                            <div className={` ${classes.box} ${above && (classes.below)}`} id={index.toString()}>
+                                <ListItem key={el.id} element={el} handleDragStop={handleDragStop} index={index} />
+                            </div>
+                        )
+                    })}
+                </div>
+               
         </section>
     )
 }

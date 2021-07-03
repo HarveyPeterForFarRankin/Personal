@@ -4,3 +4,21 @@
     padding: 50px;
     margin: 10px;
 }
+
+.box {
+    background-color: red;
+    transition: .2s;
+}
+
+.below:hover {
+    background-color: green;
+}
+
+.below:hover~.box{
+    transform: translateY(50px);
+}
+
+.listContainer{
+    border: 1px solid black;
+    
+}

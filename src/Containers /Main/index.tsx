@@ -40,6 +40,18 @@ const dummyElements = [
         Element: About,
         backgroundColor: 'orange',
         text: '<div>This is the about section</div>'
+    },
+    {
+        id: 4,
+        Element: About,
+        backgroundColor: 'orange',
+        text: '<div>This is the about section</div>'
+    },
+    {
+        id: 5,
+        Element: About,
+        backgroundColor: 'orange',
+        text: '<div>This is the about section</div>'
     }
 ]
 
@@ -101,7 +113,7 @@ const Main = () => {
 
     return (
         <main>
-            <Provider value={{elementsState,elementDispatcher}}>
+            <Provider value={{elementsState, elementDispatcher}}>
                 {inputElements.map(({Element}: IElement) => {
                     return (
                         <Element/>
@@ -109,7 +121,7 @@ const Main = () => {
                 })}
                 <div className={classes.container}>
                     <StaticList handleDragStop={handleElementsSwitch} elements={elements}/>
-                    <List  elements={inputElements} handleHover={toggleHover}/>
+                    <List elements={inputElements} handleHover={toggleHover}/>
                 </div>
             </Provider>
         </main>

@@ -4,4 +4,5 @@ export default interface IComponentState {
     inputElements: IElement [];
     inputContainerIsHovered: boolean;
     newItemPosition: number;
+    isDragged: Boolean;
 }
